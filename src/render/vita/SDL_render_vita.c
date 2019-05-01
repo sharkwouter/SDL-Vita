@@ -260,7 +260,7 @@ VITA_CreateTexture(SDL_Renderer *renderer, SDL_Texture *texture)
 
 	vita_texture->w = vita2d_texture_get_width(vita_texture->tex);
 	vita_texture->h = vita2d_texture_get_height(vita_texture->tex);
-	vita_texture->pitch = vita2d_texture_get_width(vita_texture->tex) *SDL_BYTESPERPIXEL(texture->format);
+	vita_texture->pitch = vita2d_texture_get_stride(vita_texture->tex);
 
 	texture->driverdata = vita_texture;
 
@@ -301,7 +301,7 @@ VITA_LockTexture(SDL_Renderer *renderer, SDL_Texture *texture,
 
 	*pixels =
 		(void *) ((Uint8 *) vita2d_texture_get_datap(vita_texture->tex)
-			+ (rect->y * vita_texture->w + rect->x) * SDL_BYTESPERPIXEL(texture->format));
+			+ (rect->y * vita_texture->pitch) + rect->x * SDL_BYTESPERPIXEL(texture->format));
 	*pitch = vita_texture->pitch;
 	return 0;
 }
