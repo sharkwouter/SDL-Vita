@@ -20,7 +20,7 @@
 */
 #include "../../SDL_internal.h"
 
-#ifdef SDL_TIMERS_VITA
+#ifdef SDL_TIMER_VITA
 
 #include "SDL_thread.h"
 #include "SDL_timer.h"
@@ -85,7 +85,7 @@ void SDL_Delay(Uint32 ms)
     sceKernelDelayThreadCB(ms * 1000);
 }
 
-#endif /* SDL_TIMERS_VITA */
+#endif /* SDL_TIMER_VITA */
 
 /* vim: ts=4 sw=4
  */

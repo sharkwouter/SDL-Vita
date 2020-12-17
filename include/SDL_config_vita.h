@@ -131,7 +131,7 @@
 #define SDL_THREAD_VITA  1
 
 /* Enable the stub timer support (src/timer/vita/\*.c) */
-#define SDL_TIMERS_VITA  1
+#define SDL_TIMER_VITA  1
 
 /* Enable the stub joystick driver (src/joystick/vita/\*.c) */
 #define SDL_JOYSTICK_VITA        1
