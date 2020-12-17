@@ -46,8 +46,6 @@ float forcerange[SCE_TOUCH_PORT_MAX_NUM];
 void 
 VITA_InitTouch(void)
 {
-	SceTouchPanelInfo panelinfo[SCE_TOUCH_PORT_MAX_NUM];
-
 	sceTouchSetSamplingState(SCE_TOUCH_PORT_FRONT, SCE_TOUCH_SAMPLING_STATE_START);
 	sceTouchSetSamplingState(SCE_TOUCH_PORT_BACK, SCE_TOUCH_SAMPLING_STATE_START);
 	sceTouchEnableTouchForce(SCE_TOUCH_PORT_FRONT);
