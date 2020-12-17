@@ -48,6 +48,8 @@ VITA_InitKeyboard(void)
 void 
 VITA_PollKeyboard(void)
 {
+	Uint8 changed_modifiers;
+
 	// We skip polling keyboard if no window is created
 	if (Vita_Window == NULL)
 		return;
@@ -105,7 +107,7 @@ VITA_PollKeyboard(void)
 				}
 			}
 
-			Uint8 changed_modifiers = k_reports[numReports - 1].modifiers[0] ^ prev_modifiers;
+			changed_modifiers  = k_reports[numReports - 1].modifiers[0] ^ prev_modifiers;
 
 			if (changed_modifiers & 0x01) {
 				if (prev_modifiers & 0x01) {

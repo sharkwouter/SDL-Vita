@@ -46,12 +46,13 @@ float forcerange[SCE_TOUCH_PORT_MAX_NUM];
 void 
 VITA_InitTouch(void)
 {
+	SceTouchPanelInfo panelinfo[SCE_TOUCH_PORT_MAX_NUM];
+
 	sceTouchSetSamplingState(SCE_TOUCH_PORT_FRONT, SCE_TOUCH_SAMPLING_STATE_START);
 	sceTouchSetSamplingState(SCE_TOUCH_PORT_BACK, SCE_TOUCH_SAMPLING_STATE_START);
 	sceTouchEnableTouchForce(SCE_TOUCH_PORT_FRONT);
 	sceTouchEnableTouchForce(SCE_TOUCH_PORT_BACK);
 
-	SceTouchPanelInfo panelinfo[SCE_TOUCH_PORT_MAX_NUM];
 	for(int port = 0; port < SCE_TOUCH_PORT_MAX_NUM; port++) {
 		sceTouchGetPanelInfo(port, &panelinfo[port]);
 		aAWidth[port] = (float)(panelinfo[port].maxAaX - panelinfo[port].minAaX);
@@ -75,12 +76,12 @@ VITA_QuitTouch(void){
 void 
 VITA_PollTouch(void)
 {
+	SDL_FingerID finger_id = 0;
+	int port;
+
 	// We skip polling touch if no window is created
 	if (Vita_Window == NULL)
 		return;
-
-	SDL_FingerID finger_id = 0;
-	int port;
 
 	memcpy(touch_old, touch, sizeof(touch_old));
 
@@ -95,8 +96,9 @@ VITA_PollTouch(void)
 				// for the back panel, the active touch area is used as reference
 				float x = 0;
 				float y = 0;
+				float force = 0;
 				VITA_ConvertTouchXYToSDLXY(&x, &y, touch[port].report[i].x, touch[port].report[i].y, port);
-				float force = (touch[port].report[i].force - panelinfo[port].minForce) / forcerange[port];
+				force = (touch[port].report[i].force - panelinfo[port].minForce) / forcerange[port];
 				finger_id = (SDL_FingerID) touch[port].report[i].id;
 
 				// Send an initial touch
@@ -130,8 +132,9 @@ VITA_PollTouch(void)
 				if (finger_up == 1) {
 					float x = 0;
 					float y = 0;
+					float force = 0;
 					VITA_ConvertTouchXYToSDLXY(&x, &y, touch_old[port].report[i].x, touch_old[port].report[i].y, port);
-					float force = (touch_old[port].report[i].force - panelinfo[port].minForce) / forcerange[port];
+					force = (touch_old[port].report[i].force - panelinfo[port].minForce) / forcerange[port];
 					finger_id = (SDL_FingerID) touch_old[port].report[i].id;
 					// Finger released from screen
 					SDL_SendTouch((SDL_TouchID)port,

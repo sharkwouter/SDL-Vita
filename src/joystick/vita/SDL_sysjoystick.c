@@ -93,6 +93,7 @@ static int calc_bezier_y(float t)
 int SDL_SYS_JoystickInit(void)
 {
     int i;
+    SceCtrlPortInfo myPortInfo;
 
     /* Setup input */
     sceCtrlSetSamplingMode(SCE_CTRL_MODE_ANALOG_WIDE);
@@ -106,7 +107,6 @@ int SDL_SYS_JoystickInit(void)
         analog_map[127-i] = -1 * analog_map[i+128];
     }
 
-	SceCtrlPortInfo myPortInfo;
 
 	// Assume we have at least one controller, even when nothing is paired
 	// This way the user can jump in, pair a controller
