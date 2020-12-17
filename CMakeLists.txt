@@ -1599,8 +1599,8 @@ elseif(VITA)
 
     if(SDL_TIMERS)
       set(SDL_TIMER_VITA 1)
-      file(GLOB TIMER_SOURCES ${SDL2_SOURCE_DIR}/src/timer/haiku/*.c)
-      set(SOURCE_FILES ${SOURCE_FILES} ${TIMER_SOURCES})
+      file(GLOB VITA_TIMER_SOURCES ${SDL2_SOURCE_DIR}/src/timer/vita/*.c)
+      set(SOURCE_FILES ${SOURCE_FILES} ${VITA_TIMER_SOURCES})
       set(HAVE_SDL_TIMERS TRUE)
     endif(SDL_TIMERS)
 
