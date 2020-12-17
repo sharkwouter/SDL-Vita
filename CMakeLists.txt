@@ -1582,6 +1582,23 @@ elseif(VITA)
   set(HAVE_SDL_SENSORS FALSE)
   set(HAVE_SDL_HAPTIC FALSE)
 
+  set(EXTRA_LIBS
+    vita2d
+    z
+    m
+    SceAppMgr_stub
+    SceAppUtil_stub
+    SceAudio_stub
+    SceCommonDialog_stub
+    SceCtrl_stub
+    SceDisplay_stub
+    SceGxm_stub
+    SceHid_stub
+    SceSysmodule_stub
+    SceTouch_stub
+    SDL2
+  )
+
   set(SDL_SHARED FALSE)
 
   if(SDL_AUDIO)
